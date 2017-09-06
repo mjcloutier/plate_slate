@@ -7,7 +7,9 @@ defmodule PlateSlate.Menu.Item do
   schema "items" do
     field :description, :string
     field :name, :string
-    field :category_id, :id
+    field :price, :decimal
+
+    belongs_to :category, PlateSlate.Menu.Category
 
     timestamps()
   end
@@ -15,7 +17,7 @@ defmodule PlateSlate.Menu.Item do
   @doc false
   def changeset(%Item{} = item, attrs) do
     item
-    |> cast(attrs, [:name, :description])
-    |> validate_required([:name, :description])
+      |> cast(attrs, [:name, :description, :price])
+      |> validate_required([:name, :description, :price])
   end
 end
